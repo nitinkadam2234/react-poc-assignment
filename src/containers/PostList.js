@@ -1,38 +1,44 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import _ from "lodash";
 import { GetPostList } from "../actions/postActions";
 import PostShow from "./PostShow";
 import { Row, Col, Card, Input } from 'antd';
 import { HeartOutlined, HeartFilled } from '@ant-design/icons';
+import { AddFavouritePost, RemoveFavouritePost } from "../actions/FavouritesAction";
 const { Search } = Input;
 
 const PostList = () => {
-	const [id, setId] = React.useState()
-	const [isHeartOutlineActive, setHeartOutlineActive] = React.useState(true)
-	const [isHeartFilledActive, setHeartFilledActive] = React.useState(false)
-	const [filteredPosts, setFilteredPosts] = React.useState([])
+	const [id, setId] = useState()
+	const [isHeartOutlineActive, setHeartOutlineActive] = useState(true)
+	const [isHeartFilledActive, setHeartFilledActive] = useState(false)
+	const [filteredPosts, setFilteredPosts] = useState([])
 	const dispatch = useDispatch();
 	const postList = useSelector(state => state.PostList);
-  React.useEffect(() => {
-    FetchData()
-  }, []);
+	const favouritePostIds = useSelector(state => state.Favourites.postIds);
 
-	const FetchData = () => {
+  useEffect(() => {
 		dispatch(GetPostList())
-	};
+  }, []);
 
 	const handleClick = (id) => {
 		setId(id)
 	}
 
-	const handleFavClick = () => {
+	const addToFavourites = (id) => {
+		dispatch(AddFavouritePost(id))
+		setHeartOutlineActive(!isHeartOutlineActive)
+		setHeartFilledActive(!isHeartFilledActive)
+	}
+
+	const removeFromFavourites = (id) => {
+		dispatch(RemoveFavouritePost(id))
 		setHeartOutlineActive(!isHeartOutlineActive)
 		setHeartFilledActive(!isHeartFilledActive)
 	}
 
 	const onSearchInputChange = (value) => {
-		let posts =  postList.data.filter( post => 
+		var posts =  postList.data.filter( post => 
 			post.title.toLowerCase().includes(value.toLowerCase())
 		);
 		setFilteredPosts(posts)
@@ -49,12 +55,18 @@ const PostList = () => {
 						return(
 							<div className="site-card-border-less-wrapper">
 								<Card title={post.title} bordered={false} onClick={() => handleClick(post.id)}>
+									<p>{post.id}</p>
 									<p>{post.body}</p>
-									{ isHeartOutlineActive && <HeartOutlined onClick={() => handleFavClick()}/>}
-									{ isHeartFilledActive && <HeartFilled onClick={() => handleFavClick()}/>}
+									{ 
+										favouritePostIds.includes(post.id)
+										?
+										<HeartFilled onClick={() => removeFromFavourites(post.id)}/>
+										:
+										<HeartOutlined onClick={() => addToFavourites(post.id)}/>
+									}
 								</Card>
 							</div>
-						) 
+						)
 					})}
 				</div>
 			)

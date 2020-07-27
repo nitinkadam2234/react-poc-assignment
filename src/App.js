@@ -7,6 +7,7 @@ import UserList from './containers/UserList';
 import UserShow from './containers/UserShow';
 import CommentList from './containers/CommentList';
 import CommentShow from './containers/CommentShow';
+import Favourites from './containers/Favourites';
 import { Layout } from 'antd';
 
 const { Header, Footer, Sider, Content } = Layout;
@@ -29,6 +30,9 @@ function App() {
               <li>
                 <Link to={"/users"}>Users</Link>
               </li>
+              <li>
+                <Link to={"/favourites"}>Favourites</Link>
+              </li>
             </ul>
           </Sider>
           <Content>
@@ -39,6 +43,7 @@ function App() {
               <Route path={"/users/:id"} exact component={UserShow} />
               <Route path={"/comments"} exact component={CommentList} />
               <Route path={"/comments/:id"} exact component={CommentShow} />
+              <Route path={"/favourites"} exact component={Favourites} />
               <Redirect to={"/posts"} />
             </Switch>
           </Content>

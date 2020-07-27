@@ -1,16 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import _ from "lodash";
 import { GetUserList } from "../actions/userActions";
 import UserShow from "./UserShow";
 import { Row, Col, Card, Input } from 'antd';
+import { HeartOutlined, HeartFilled } from '@ant-design/icons';
+import { AddFavouriteUser, RemoveFavouriteUser } from "../actions/FavouritesAction";
 const { Search } = Input;
 
 const UserList = () => {
 	const [id, setId] = React.useState()
+	const [isHeartOutlineActive, setHeartOutlineActive] = useState(true)
+	const [isHeartFilledActive, setHeartFilledActive] = useState(false)
 	const [filteredUsers, setFilteredUsers] = React.useState([])
 	const dispatch = useDispatch();
 	const userList = useSelector(state => state.UserList)
+	const favouriteUserIds = useSelector(state => state.Favourites.userIds);
+
   React.useEffect(() => {
     FetchData()
   }, []);
@@ -21,6 +27,18 @@ const UserList = () => {
 
 	const handleClick = (id) => {
 		setId(id);
+	}
+
+	const addToFavourites = (id) => {
+		dispatch(AddFavouriteUser(id))
+		setHeartOutlineActive(!isHeartOutlineActive)
+		setHeartFilledActive(!isHeartFilledActive)
+	}
+
+	const removeFromFavourites = (id) => {
+		dispatch(RemoveFavouriteUser(id))
+		setHeartOutlineActive(!isHeartOutlineActive)
+		setHeartFilledActive(!isHeartFilledActive)
 	}
 
 	const onSearchInputChange = (value) => {
@@ -46,6 +64,13 @@ const UserList = () => {
 									<p>{user.email}</p>
 									<p>{user.phone}</p>
 									<p>{user.website}</p>
+									{
+										favouriteUserIds.includes(user.id)
+										?
+										<HeartFilled onClick={() => removeFromFavourites(user.id)}/>
+										:
+										<HeartOutlined onClick={() => addToFavourites(user.id)}/>
+									}
 								</Card>
 							</div>
 						)

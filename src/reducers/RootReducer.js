@@ -5,6 +5,7 @@ import UserListReducer from "./UserListReducer";
 import UserShowReducer from "./UserShowReducer";
 import CommentListReducer from "./CommentListReducer";
 import CommentShowReducer from "./CommentShowReducer";
+import FavouriteReducer from "./FavouriteReducer";
 
 const RootReducer = combineReducers({
 	PostList: PostListReducer,
@@ -12,7 +13,8 @@ const RootReducer = combineReducers({
 	UserList: UserListReducer,
 	UserShow: UserShowReducer,
 	CommentList: CommentListReducer,
-	CommentShow: CommentShowReducer
+	CommentShow: CommentShowReducer,
+	Favourites: FavouriteReducer
 });
 
 export default RootReducer;

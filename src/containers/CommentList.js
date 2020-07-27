@@ -1,30 +1,44 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import _ from "lodash";
 import { GetCommentList } from "../actions/commentActions";
 import CommentShow from "./CommentShow";
 import { Row, Col, Card, Input } from 'antd';
+import { HeartOutlined, HeartFilled } from '@ant-design/icons';
+import { AddFavouriteComment, RemoveFavouriteComment } from "../actions/FavouritesAction";
 const { Search } = Input;
 
 const CommentList = () => {
-	const [id, setId] = React.useState()
-	const [filteredComments, setFilteredComments] = React.useState([])
+	const [id, setId] = useState()
+	const [isHeartOutlineActive, setHeartOutlineActive] = useState(true)
+	const [isHeartFilledActive, setHeartFilledActive] = useState(false)
+	const [filteredComments, setFilteredComments] = useState([])
 	const dispatch = useDispatch();
 	const commentList = useSelector(state => state.CommentList);
-  React.useEffect(() => {
-    FetchData()
-  }, []);
+	const favouriteCommentIds = useSelector(state => state.Favourites.commentIds);
 
-	const FetchData = () => {
-		dispatch(GetCommentList())
-	};
+  useEffect(() => {
+    dispatch(GetCommentList())
+  }, []);
 
 	const handleClick = (id) => {
 		setId(id)
 	}
 
+	const addToFavourites = (id) => {
+		dispatch(AddFavouriteComment(id))
+		setHeartOutlineActive(!isHeartOutlineActive)
+		setHeartFilledActive(!isHeartFilledActive)
+	}
+
+	const removeFromFavourites = (id) => {
+		dispatch(RemoveFavouriteComment(id))
+		setHeartOutlineActive(!isHeartOutlineActive)
+		setHeartFilledActive(!isHeartFilledActive)
+	}
+
 	const onSearchInputChange = (value) => {
-		let comments =  commentList.data.filter( comment => 
+		var comments =  commentList.data.filter( comment => 
 			comment.name.toLowerCase().includes(value.toLowerCase())
 		);
 		setFilteredComments(comments)
@@ -43,6 +57,13 @@ const CommentList = () => {
 								<Card title={comment.name} bordered={false} onClick={() => handleClick(comment.id)}>
 									<p>{comment.name}</p>
 									<p>{comment.body}</p>
+									{
+										favouriteCommentIds.includes(comment.id)
+										?
+										<HeartFilled onClick={() => removeFromFavourites(comment.id)}/>
+										:
+										<HeartOutlined onClick={() => addToFavourites(comment.id)}/>
+									}
 								</Card>
 							</div>
 						) 
