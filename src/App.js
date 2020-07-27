@@ -7,7 +7,7 @@ import UserList from './containers/UserList';
 import UserShow from './containers/UserShow';
 import CommentList from './containers/CommentList';
 import CommentShow from './containers/CommentShow';
-import { Layout, Menu } from 'antd';
+import { Layout } from 'antd';
 
 const { Header, Footer, Sider, Content } = Layout;
 

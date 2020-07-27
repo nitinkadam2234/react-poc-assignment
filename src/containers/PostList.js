@@ -3,15 +3,15 @@ import { useDispatch, useSelector } from "react-redux";
 import _ from "lodash";
 import { GetPostList } from "../actions/postActions";
 import PostShow from "./PostShow";
-import { Row, Col, Card } from 'antd';
+import { Row, Col, Card, Input } from 'antd';
 import { HeartOutlined, HeartFilled } from '@ant-design/icons';
-import { Input } from 'antd';
 const { Search } = Input;
 
 const PostList = () => {
 	const [id, setId] = React.useState()
 	const [isHeartOutlineActive, setHeartOutlineActive] = React.useState(true)
 	const [isHeartFilledActive, setHeartFilledActive] = React.useState(false)
+	const [filteredPosts, setFilteredPosts] = React.useState([])
 	const dispatch = useDispatch();
 	const postList = useSelector(state => state.PostList);
   React.useEffect(() => {
@@ -31,16 +31,21 @@ const PostList = () => {
 		setHeartFilledActive(!isHeartFilledActive)
 	}
 
-	const handleSearch = (value) => {
-		console.log(value)
+	const onSearchInputChange = (value) => {
+		let posts =  postList.data.filter( post => 
+			post.title.toLowerCase().includes(value.toLowerCase())
+		);
+		setFilteredPosts(posts)
 	}
 
 	const showData = () => {
-		if(!_.isEmpty(postList.data)) {
+		let posts = _.isEmpty(filteredPosts) ? postList.data : filteredPosts;
+
+		if(!_.isEmpty(posts)) {
 			return(
 				<div className={"list-wrapper"}>
-					<Search placeholder="input search text" onSearch={value => handleSearch(value)} enterButton />
-					{postList.data.map(post => {
+					<Search placeholder="Please search post(s) by content" onSearch={value => onSearchInputChange(value)} enterButton />
+					{posts.map(post => {
 						return(
 							<div className="site-card-border-less-wrapper">
 								<Card title={post.title} bordered={false} onClick={() => handleClick(post.id)}>

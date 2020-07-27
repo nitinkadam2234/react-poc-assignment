@@ -3,10 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import _ from "lodash";
 import { GetUserList } from "../actions/userActions";
 import UserShow from "./UserShow";
-import { Row, Col, Card } from 'antd';
+import { Row, Col, Card, Input } from 'antd';
+const { Search } = Input;
 
 const UserList = () => {
 	const [id, setId] = React.useState()
+	const [filteredUsers, setFilteredUsers] = React.useState([])
 	const dispatch = useDispatch();
 	const userList = useSelector(state => state.UserList)
   React.useEffect(() => {
@@ -14,18 +16,29 @@ const UserList = () => {
   }, []);
 
 	const FetchData = () => {
-		dispatch(GetUserList())
+		dispatch(GetUserList());
 	};
 
 	const handleClick = (id) => {
-		setId(id)
+		setId(id);
+	}
+
+	const onSearchInputChange = (value) => {
+		let users =  userList.data.filter( user => 
+			user.name.toLowerCase().includes(value.toLowerCase())
+		);
+
+		setFilteredUsers(users);
 	}
 
 	const showData = () => {
-		if (!_.isEmpty(userList.data)){
+		let users = _.isEmpty(filteredUsers) ? userList.data : filteredUsers;
+
+		if (!_.isEmpty(users)){
 			return(
 				<div className={"list-wrapper"}>
-					{userList.data.map(user => {
+					<Search placeholder="Please search user(s) by name" onSearch={value => onSearchInputChange(value)} enterButton />
+					{users.map(user => {
 						return(
 							<div className="site-card-border-less-wrapper">
 								<Card title={user.name} bordered={false} onClick={() => handleClick(user.id)}>

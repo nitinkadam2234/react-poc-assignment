@@ -3,10 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import _ from "lodash";
 import { GetCommentList } from "../actions/commentActions";
 import CommentShow from "./CommentShow";
-import { Row, Col, Card } from 'antd';
+import { Row, Col, Card, Input } from 'antd';
+const { Search } = Input;
 
 const CommentList = () => {
 	const [id, setId] = React.useState()
+	const [filteredComments, setFilteredComments] = React.useState([])
 	const dispatch = useDispatch();
 	const commentList = useSelector(state => state.CommentList);
   React.useEffect(() => {
@@ -21,11 +23,21 @@ const CommentList = () => {
 		setId(id)
 	}
 
+	const onSearchInputChange = (value) => {
+		let comments =  commentList.data.filter( comment => 
+			comment.name.toLowerCase().includes(value.toLowerCase())
+		);
+		setFilteredComments(comments)
+	}
+
 	const showData = () => {
-		if(!_.isEmpty(commentList.data)) {
+		let comments = _.isEmpty(filteredComments) ? commentList.data : filteredComments;
+
+		if(!_.isEmpty(comments)) {
 			return(
 				<div className={"list-wrapper"}>
-					{commentList.data.map(comment => {
+					<Search placeholder="Please search comment(s) by name" onSearch={value => onSearchInputChange(value)} enterButton />
+					{comments.map(comment => {
 						return(
 							<div className="site-card-border-full-wrapper">
 								<Card title={comment.name} bordered={false} onClick={() => handleClick(comment.id)}>
