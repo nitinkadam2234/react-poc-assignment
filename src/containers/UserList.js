@@ -18,12 +18,8 @@ const UserList = () => {
 	const favouriteUserIds = useSelector(state => state.Favourites.userIds);
 
   React.useEffect(() => {
-    FetchData()
-  }, [FetchData]);
-
-	const FetchData = () => {
-		dispatch(GetUserList());
-	};
+    dispatch(GetUserList());
+  }, []);
 
 	const handleClick = (id) => {
 		setId(id);
