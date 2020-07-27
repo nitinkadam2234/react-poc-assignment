@@ -45,7 +45,6 @@ const Favourites = () => {
 		if(!_.isEmpty(favPosts)) {
 			return(
 				<div className={"list-wrapper"}>
-					<h2>POSTS</h2>
 					{favPosts.map(post => {
 						return(
 							<div className="site-card-border-less-wrapper">
@@ -69,7 +68,6 @@ const Favourites = () => {
 		if(!_.isEmpty(favUsers)) {
 			return(
 				<div className={"list-wrapper"}>
-					<h2>USERS</h2>
 					{favUsers.map(user => {
 						return(
 							<div className="site-card-border-less-wrapper">
@@ -96,7 +94,6 @@ const Favourites = () => {
 		if(!_.isEmpty(favComments)) {
 			return(
 				<div className={"list-wrapper"}>
-					<h2>COMMENTS</h2>
 					{favComments.map(comment => {
 						return(
 							<div className="site-card-border-less-wrapper">
@@ -118,12 +115,15 @@ const Favourites = () => {
 	return(
 		<>
 			<Row>
+				<h2>POSTS</h2>
 				<Col span={24}>{showFavouritePosts()}</Col>
 			</Row>
 			<Row>
+				<h2>USERS</h2>
 				<Col span={24}>{showFavouriteUsers()}</Col>
 			</Row>
 			<Row>
+				<h2>COMMENTS</h2>
 				<Col span={24}>{showFavouriteComments()}</Col>
 			</Row>
 		</>
