@@ -1,0 +1,22 @@
+@import '~antd/dist/antd.css';
+
+aside.ant-layout-sider.ant-layout-sider-dark li {
+  color: white;
+}
+
+.ant-layout-footer {
+  background: #001529;
+}
+
+.site-card-border-less-wrapper {
+  padding: 30px;
+  background: #ececec;
+}
+
+.site-card-border-full-wrapper {
+  padding: 30px;
+}
+
+span.ant-input-search.ant-input-search-enter-button.ant-input-group-wrapper {
+  padding: 5px 0 5px 5px;
+}
