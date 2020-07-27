@@ -19,7 +19,7 @@ const UserList = () => {
 
   React.useEffect(() => {
     FetchData()
-  }, []);
+  }, [FetchData]);
 
 	const FetchData = () => {
 		dispatch(GetUserList());

@@ -11,7 +11,7 @@ const UserShow = (props) => {
 
   React.useEffect(() => {
     dispatch(GetUser(id))
-  }, [id]);
+  }, [dispatch, id]);
 
 	const showData = () => {
 		if(!_.isEmpty(user.userData)) {

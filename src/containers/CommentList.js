@@ -19,7 +19,7 @@ const CommentList = () => {
 
   useEffect(() => {
     dispatch(GetCommentList())
-  }, []);
+  }, [dispatch]);
 
 	const handleClick = (id) => {
 		setId(id)

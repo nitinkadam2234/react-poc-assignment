@@ -19,7 +19,7 @@ const PostList = () => {
 
   useEffect(() => {
 		dispatch(GetPostList())
-  }, []);
+  }, [dispatch]);
 
 	const handleClick = (id) => {
 		setId(id)

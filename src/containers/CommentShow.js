@@ -11,7 +11,7 @@ const CommentShow = (props) => {
 
   React.useEffect(() => {
     dispatch(GetComment(id))
-  }, [id]);
+  }, [dispatch, id]);
 
 	const showData = () => {
 		if(!_.isEmpty(comment.commentData)) {

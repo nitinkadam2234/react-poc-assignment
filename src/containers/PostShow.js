@@ -11,7 +11,7 @@ const PostShow = (props) => {
 
   React.useEffect(() => {
     dispatch(GetPost(id))
-  }, [id]);
+  }, [dispatch, id]);
 
 	const showData = () => {
 		if(!_.isEmpty(post.postData)) {
