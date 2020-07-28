@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import _ from "lodash";
-import { Row, Col, Card, Collapse, Typography } from 'antd';
+import { Card, Collapse, Typography } from 'antd';
 import { HeartFilled } from '@ant-design/icons';
 import {
 	RemoveFavouritePost,

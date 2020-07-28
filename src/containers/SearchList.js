@@ -1,11 +1,13 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import _ from "lodash";
-import { Row, Col, Card } from 'antd';
+import { Card, Collapse, Typography } from 'antd';
 import queryString from 'query-string';
 import { GetUserList } from "../actions/userActions";
 import { GetPostList } from "../actions/postActions";
 import { GetCommentList } from "../actions/commentActions";
+
+const { Panel } = Collapse;
 
 const SearchList = (props) => {
 	let value = queryString.parse(props.location.search).query
@@ -100,20 +102,17 @@ const SearchList = (props) => {
 
 	return (
 		<>
-			<Row>
-				<h2>Users</h2>
-				<Col span={24}>{showUsersData()}</Col>
-			</Row>
-
-			<Row>
-				<h2>Posts</h2>
-				<Col span={24}>{showPostsData()}</Col>
-			</Row>
-
-			<Row>
-				<h2>Comments</h2>
-				<Col span={24}>{showCommentsData()}</Col>
-			</Row>
+			<Collapse>
+				<Panel header="Users" key="1">
+					{showUsersData()}
+				</Panel>
+				<Panel header="Posts" key="2">
+					{showPostsData()}
+				</Panel>
+				<Panel header="Comments" key="3">
+					{showCommentsData()}
+				</Panel>
+  		</Collapse>
 		</>
 	)
 };
