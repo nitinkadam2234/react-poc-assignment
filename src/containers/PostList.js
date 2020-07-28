@@ -6,6 +6,8 @@ import PostShow from "./PostShow";
 import { Row, Col, Card, Input } from 'antd';
 import { HeartOutlined, HeartFilled } from '@ant-design/icons';
 import { AddFavouritePost, RemoveFavouritePost } from "../actions/FavouritesAction";
+import { SortDescendingOutlined, SortAscendingOutlined } from '@ant-design/icons';
+
 const { Search } = Input;
 
 const PostList = () => {
@@ -13,13 +15,15 @@ const PostList = () => {
 	const [isHeartOutlineActive, setHeartOutlineActive] = useState(true)
 	const [isHeartFilledActive, setHeartFilledActive] = useState(false)
 	const [filteredPosts, setFilteredPosts] = useState([])
+	const [sortedPosts, setSortedPosts] = useState([])
+
 	const dispatch = useDispatch();
 	const postList = useSelector(state => state.PostList);
 	const favouritePostIds = useSelector(state => state.Favourites.postIds);
 
   useEffect(() => {
-		dispatch(GetPostList())
-  }, [dispatch]);
+		dispatch(GetPostList());
+	}, []);
 
 	const handleClick = (id) => {
 		setId(id)
@@ -41,16 +45,33 @@ const PostList = () => {
 		var posts =  postList.data.filter( post => 
 			post.title.toLowerCase().includes(value.toLowerCase())
 		);
+
 		setFilteredPosts(posts)
 	}
 
-	const showData = () => {
+	const sortPostsData = (value) => {
 		let posts = _.isEmpty(filteredPosts) ? postList.data : filteredPosts;
+
+		posts = _.orderBy(posts, ['id'],[value]);
+
+		setSortedPosts(posts)
+	}
+
+	const showData = () => {
+		let posts = _.isEmpty(filteredPosts) ? (_.isEmpty(sortedPosts) ? postList.data : sortedPosts) : filteredPosts;
 
 		if(!_.isEmpty(posts)) {
 			return(
 				<div className={"list-wrapper"}>
 					<Search placeholder="Please search post(s) by content" onSearch={value => onSearchInputChange(value)} enterButton />
+					{_.isEmpty(filteredPosts) && 
+						<Row>
+							<Col span={24}>
+								<SortDescendingOutlined onClick={() => sortPostsData('desc')}/>
+								<SortAscendingOutlined onClick={() => sortPostsData('asc')}/>
+							</Col>
+						</Row>
+					}
 					{posts.map(post => {
 						return(
 							<div className="site-card-border-less-wrapper">

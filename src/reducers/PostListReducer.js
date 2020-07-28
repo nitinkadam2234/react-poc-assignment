@@ -1,3 +1,5 @@
+import _ from "lodash";
+
 const DefaultState = {
 	loading: false,
 	data: [],
@@ -15,7 +17,7 @@ const PostListReducer = (state = DefaultState, action) => {
 			return {
 				...state,
 				loading: true,
-				data: action.payload.data,
+				data: _.orderBy(action.payload.data, ['id'],['desc']),
 				errorMsg: ""
 			};
 		case "POST_LIST_FAIL":

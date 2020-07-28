@@ -32,3 +32,14 @@ span.ant-input-search.ant-input-search-enter-button.ant-input-group-wrapper {
 main.ant-layout-content {
   height: 550px;
 }
+
+.ant-col.ant-col-24 {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.ant-col.ant-col-24 .anticon.anticon-sort-descending, .ant-col.ant-col-24 .anticon.anticon-sort-ascending {
+  font-size: 20px;
+  width: 20px;
+}
+
