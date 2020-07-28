@@ -8,7 +8,7 @@ import UserShow from './containers/UserShow';
 import CommentList from './containers/CommentList';
 import CommentShow from './containers/CommentShow';
 import Favourites from './containers/Favourites';
-import { Layout } from 'antd';
+import { Layout, Button } from 'antd';
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -20,20 +20,26 @@ function App() {
         <Header />
         <Layout>
           <Sider>
-            <ul>
-              <li>
-                <Link to={"/posts"}>Posts</Link>
-              </li>
-              <li>
-                <Link to={"/comments"}>Comments</Link>
-              </li>
-              <li>
-                <Link to={"/users"}>Users</Link>
-              </li>
-              <li>
-                <Link to={"/favourites"}>Favourites</Link>
-              </li>
-            </ul>
+            <Link to={"/posts"}>
+              <Button type="primary">
+                Posts
+              </Button>
+            </Link><br/>
+            <Link to={"/comments"}>
+              <Button type="primary">
+                Comments
+              </Button>
+            </Link><br/>
+            <Link to={"/users"}>
+              <Button type="primary">
+                Users
+              </Button>
+            </Link><br/>
+            <Link to={"/favourites"}>
+              <Button type="primary">
+                Favourites
+              </Button>
+            </Link><br/>
           </Sider>
           <Content>
             <Switch>

@@ -20,3 +20,15 @@ aside.ant-layout-sider.ant-layout-sider-dark li {
 span.ant-input-search.ant-input-search-enter-button.ant-input-group-wrapper {
   padding: 5px 0 5px 5px;
 }
+
+.ant-layout-sider-children button.ant-btn.ant-btn-primary {
+  width: 100%;
+  border-radius: 0;
+  text-align: left;
+  font-weight: bold;
+}
+
+
+main.ant-layout-content {
+  height: 550px;
+}
