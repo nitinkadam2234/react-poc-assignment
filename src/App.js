@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 import './App.css';
-import { Switch, Route, Redirect, Link } from "react-router-dom";
+import { Switch, Route, Redirect, Link, useHistory } from "react-router-dom";
 import PostList from './containers/PostList';
 import PostShow from './containers/PostShow';
 import UserList from './containers/UserList';
@@ -8,16 +8,37 @@ import UserShow from './containers/UserShow';
 import CommentList from './containers/CommentList';
 import CommentShow from './containers/CommentShow';
 import Favourites from './containers/Favourites';
-import { Layout, Button } from 'antd';
-
+import SearchList from './containers/SearchList';
+import { Layout, Button, Row, Col, Input } from 'antd';
+const { Search } = Input;
 const { Header, Footer, Sider, Content } = Layout;
 
 function App() {
+
+  const history = useHistory();
+
+  const onSearchInputChange = (value) => {
+    let path = `/search?query=${value}`;
+    history.push(path);
+  }
+
   return (
     <div className="App">
     <Switch>
       <Layout>
-        <Header />
+        <Header>  
+          <Row>
+            <Col span={6}></Col>
+            <Col span={12}>
+              <Search
+                placeholder="Search..."
+                onSearch={value => onSearchInputChange(value)}
+                enterButton
+              />
+            </Col>
+            <Col span={6}></Col>
+          </Row>
+        </Header>
         <Layout>
           <Sider>
             <Link to={"/posts"}>
@@ -43,6 +64,7 @@ function App() {
           </Sider>
           <Content>
             <Switch>
+              <Route path={"/search"} component={SearchList} />
               <Route path={"/posts"} exact component={PostList} />
               <Route path={"/post/:id"} exact component={PostShow} />
               <Route path={"/users"} exact component={UserList} />

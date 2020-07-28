@@ -15,7 +15,7 @@ const FavouriteReducer = (state = DefaultState, action) => {
 				postIds: existingPostIds
 			};
 		case "REMOVE_FAVOURITE_POST":
-			var ids = state.postIds.filter((id)=> id != action.payload)
+			var ids = state.postIds.filter((id)=> id !== action.payload)
 
 			return {
 				...state,
@@ -30,7 +30,7 @@ const FavouriteReducer = (state = DefaultState, action) => {
 				userIds: existingUserIds
 			};
 		case "REMOVE_FAVOURITE_USER":
-			var ids = state.userIds.filter((id)=> id != action.payload)
+			var ids = state.userIds.filter((id)=> id !== action.payload)
 
 			return {
 				...state,
@@ -45,7 +45,7 @@ const FavouriteReducer = (state = DefaultState, action) => {
 				commentIds: existingCommentIds
 			};
 		case "REMOVE_FAVOURITE_COMMENT":
-			var ids = state.commentIds.filter((id)=> id != action.payload)
+			var ids = state.commentIds.filter((id)=> id !== action.payload)
 
 			return {
 				...state,

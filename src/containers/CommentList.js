@@ -53,7 +53,7 @@ const CommentList = () => {
 					<Search placeholder="Please search comment(s) by name" onSearch={value => onSearchInputChange(value)} enterButton />
 					{comments.map(comment => {
 						return(
-							<div className="site-card-border-full-wrapper">
+							<div className="site-card-border-less-wrapper">
 								<Card title={comment.name} bordered={false} onClick={() => handleClick(comment.id)}>
 									<p>{comment.name}</p>
 									<p>{comment.body}</p>
