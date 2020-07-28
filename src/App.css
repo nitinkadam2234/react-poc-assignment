@@ -46,3 +46,11 @@ main.ant-layout-content {
 .ant-collapse-content > .ant-collapse-content-box {
   padding: 0;
 }
+
+.site-card-border-less-wrapper {
+  padding: 5px;
+}
+
+.site-card-border-full-wrapper {
+  padding: 10px;
+}
