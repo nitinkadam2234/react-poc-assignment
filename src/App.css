@@ -33,7 +33,7 @@ main.ant-layout-content {
   height: 550px;
 }
 
-.ant-col.ant-col-24 {
+.list-wrapper .ant-col.ant-col-24 {
   display: flex;
   justify-content: flex-end;
 }
