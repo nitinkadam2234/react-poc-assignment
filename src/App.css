@@ -43,3 +43,6 @@ main.ant-layout-content {
   width: 20px;
 }
 
+.ant-collapse-content > .ant-collapse-content-box {
+  padding: 0;
+}

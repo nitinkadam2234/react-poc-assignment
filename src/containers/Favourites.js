@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import _ from "lodash";
-import { Row, Col, Card } from 'antd';
+import { Row, Col, Card, Collapse, Typography } from 'antd';
 import { HeartFilled } from '@ant-design/icons';
 import {
 	RemoveFavouritePost,
 	RemoveFavouriteUser,
 	RemoveFavouriteComment
 } from "../actions/FavouritesAction";
+
+const { Title } = Typography;
+const { Panel } = Collapse;
 
 const Favourites = () => {
 	const [isHeartOutlineActive, setHeartOutlineActive] = useState(false)
@@ -114,18 +117,18 @@ const Favourites = () => {
 
 	return(
 		<>
-			<Row>
-				<h2>POSTS</h2>
-				<Col span={24}>{showFavouritePosts()}</Col>
-			</Row>
-			<Row>
-				<h2>USERS</h2>
-				<Col span={24}>{showFavouriteUsers()}</Col>
-			</Row>
-			<Row>
-				<h2>COMMENTS</h2>
-				<Col span={24}>{showFavouriteComments()}</Col>
-			</Row>
+			<Title>Favourites</Title>
+			<Collapse>
+				<Panel header="Users" key="1">
+					{showFavouriteUsers()}
+				</Panel>
+				<Panel header="Posts" key="2">
+					{showFavouritePosts()}
+				</Panel>
+				<Panel header="Comments" key="3">
+					{showFavouriteComments()}
+				</Panel>
+  		</Collapse>
 		</>
 	)
 };
