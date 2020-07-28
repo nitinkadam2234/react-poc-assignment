@@ -1,0 +1,56 @@
+@import '~antd/dist/antd.css';
+
+aside.ant-layout-sider.ant-layout-sider-dark li {
+  color: white;
+}
+
+.ant-layout-footer {
+  background: #001529;
+}
+
+.site-card-border-less-wrapper {
+  padding: 30px;
+  background: #ececec;
+}
+
+.site-card-border-full-wrapper {
+  padding: 30px;
+}
+
+span.ant-input-search.ant-input-search-enter-button.ant-input-group-wrapper {
+  padding: 15px;
+}
+
+.ant-layout-sider-children button.ant-btn.ant-btn-primary {
+  width: 100%;
+  border-radius: 0;
+  text-align: left;
+  font-weight: bold;
+}
+
+
+main.ant-layout-content {
+  height: 550px;
+}
+
+.list-wrapper .ant-col.ant-col-24 {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.ant-col.ant-col-24 .anticon.anticon-sort-descending, .ant-col.ant-col-24 .anticon.anticon-sort-ascending {
+  font-size: 20px;
+  width: 20px;
+}
+
+.ant-collapse-content > .ant-collapse-content-box {
+  padding: 0;
+}
+
+.site-card-border-less-wrapper {
+  padding: 5px;
+}
+
+.site-card-border-full-wrapper {
+  padding: 10px;
+}
